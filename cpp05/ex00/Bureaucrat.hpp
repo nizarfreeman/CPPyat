@@ -1,0 +1,43 @@
+#ifndef BU_HPP
+# define BU_HPP
+# include <iostream>
+# include <stdexcept>
+
+class Bureaucrat
+{
+    private:
+        std::string name;
+        int grade;
+    public:
+        Bureaucrat();
+        Bureaucrat(const std::string &name, const int &grade);
+        Bureaucrat(const Bureaucrat &other);
+        Bureaucrat &operator=(const Bureaucrat &other);
+        ~Bureaucrat();
+
+        std::string get_n(void) const;
+        int get_g(void) const;
+        
+        class GradeTooHighException: public std::exception
+        {
+            private:
+                std::string message;
+            public:
+                GradeTooHighException();
+                GradeTooHighException(const std::string &message);
+                ~GradeTooHighException() throw();
+                const char *what() const throw();
+        };
+        class GradeTooLowException: public std::exception
+        {
+            private:
+                std::string message;
+            public:
+                GradeTooLowException();
+                GradeTooLowException(const std::string &message);
+                ~GradeTooLowException() throw();
+                const char *what() const throw();
+        };
+};
+
+#endif
