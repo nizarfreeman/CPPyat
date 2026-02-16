@@ -15,8 +15,10 @@ class Bureaucrat
         Bureaucrat &operator=(const Bureaucrat &other);
         ~Bureaucrat();
 
-        std::string get_n(void) const;
-        int get_g(void) const;
+        std::string getName(void) const;
+        int getGrade(void) const;
+        void incer(void);
+        void decr(void);
         
         class GradeTooHighException: public std::exception
         {
@@ -39,5 +41,7 @@ class Bureaucrat
                 const char *what() const throw();
         };
 };
+
+std::ostream& operator<<(std::ostream &out, const Bureaucrat &obj);
 
 #endif
