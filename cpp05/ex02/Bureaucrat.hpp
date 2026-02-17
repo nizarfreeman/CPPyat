@@ -1,28 +1,28 @@
-#ifndef F_HPP
-# define F_HPP
+#ifndef BU_HPP
+# define BU_HPP
 # include <iostream>
 # include <stdexcept>
-  class Bureaucrat; 
+  class Form;
 
-class Form
+class Bureaucrat
 {
     private:
-        const std::string name;
-        bool sign;
-        const int s_grade;
-        const int e_grade;
+        std::string name;
+        int grade;
     public:
+        Bureaucrat();
+        Bureaucrat(const std::string &name, const int &grade);
+        Bureaucrat(const Bureaucrat &other);
+        Bureaucrat &operator=(const Bureaucrat &other);
+        ~Bureaucrat();
 
-        std::string getn(void) const;
-        bool gets(void) const;
-        int getsg(void) const;
-        int geteg(void) const;
+        std::string getName(void) const;
+        int getGrade(void) const;
+        void incer(void);
+        void decr(void);
 
-        Form();
-        Form(const std::string &namee, const bool &signn, const int &s_gradee, const int &e_gradee);
-        Form(const Form &obj);
-        Form &operator=(const Form &other);
-
+        void signForm(Form &obj);
+        
         class GradeTooHighException: public std::exception
         {
             private:
@@ -37,16 +37,14 @@ class Form
         {
             private:
                 std::string message;
-            public:
+                public:
                 GradeTooLowException();
                 GradeTooLowException(const std::string &message);
                 ~GradeTooLowException() throw();
                 const char *what() const throw();
         };
-
-        void beSigned(const Bureaucrat &obj);
 };
 
-std::ostream &operator<<(std::ostream &out, const Form &obj);
+std::ostream& operator<<(std::ostream &out, const Bureaucrat &obj);
 
 #endif
