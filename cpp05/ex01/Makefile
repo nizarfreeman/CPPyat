@@ -1,7 +1,7 @@
 C = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-SRC = main.cpp Bureaucrat.cpp
-HEADER = Bureaucrat.hpp
+SRC = main.cpp Bureaucrat.cpp Form.cpp
+HEADER = Bureaucrat.hpp Form.hpp
 OBJ = $(SRC:.cpp=.o)
 NAME = a.out
 

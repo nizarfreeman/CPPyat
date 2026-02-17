@@ -2,6 +2,7 @@
 # define BU_HPP
 # include <iostream>
 # include <stdexcept>
+  class Form;
 
 class Bureaucrat
 {
@@ -19,6 +20,8 @@ class Bureaucrat
         int getGrade(void) const;
         void incer(void);
         void decr(void);
+
+        void signForm(Form &obj);
         
         class GradeTooHighException: public std::exception
         {
@@ -34,7 +37,7 @@ class Bureaucrat
         {
             private:
                 std::string message;
-            public:
+                public:
                 GradeTooLowException();
                 GradeTooLowException(const std::string &message);
                 ~GradeTooLowException() throw();
