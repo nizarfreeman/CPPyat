@@ -4,7 +4,7 @@
 # include <stdexcept>
   class Bureaucrat; 
 
-class Form
+class AForm
 {
     private:
         const std::string name;
@@ -18,10 +18,11 @@ class Form
         int getsg(void) const;
         int geteg(void) const;
 
-        Form();
-        Form(const std::string &namee, const bool &signn, const int &s_gradee, const int &e_gradee);
-        Form(const Form &obj);
-        Form &operator=(const Form &other);
+        AForm();
+        AForm(const std::string &namee, const bool &signn, const int &s_gradee, const int &e_gradee);
+        AForm(const AForm &obj);
+        virtual ~AForm();
+        AForm &operator=(const AForm &other);
 
         class GradeTooHighException: public std::exception
         {
@@ -45,8 +46,9 @@ class Form
         };
 
         void beSigned(const Bureaucrat &obj);
+        virtual void execute(Bureaucrat const &executor) const = 0;
 };
 
-std::ostream &operator<<(std::ostream &out, const Form &obj);
+std::ostream &operator<<(std::ostream &out, const AForm &obj);
 
 #endif

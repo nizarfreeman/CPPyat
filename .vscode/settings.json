@@ -11,7 +11,7 @@
     "-Wextra",
     "-Wpedantic",
     "-Wshadow",
-    "-Wformat=2",
+    "-WFormat=2",
     "-Wcast-align",
     "-Wconversion",
     "-Wsign-conversion",

@@ -2,7 +2,7 @@
 # define BU_HPP
 # include <iostream>
 # include <stdexcept>
-  class Form;
+  class AForm;
 
 class Bureaucrat
 {
@@ -21,7 +21,7 @@ class Bureaucrat
         void incer(void);
         void decr(void);
 
-        void signForm(Form &obj);
+        void signForm(AForm &obj);
         
         class GradeTooHighException: public std::exception
         {
