@@ -22,6 +22,7 @@ class Form
         Form(const std::string &namee, const bool &signn, const int &s_gradee, const int &e_gradee);
         Form(const Form &obj);
         Form &operator=(const Form &other);
+        ~Form();
 
         class GradeTooHighException: public std::exception
         {

@@ -48,6 +48,11 @@ Form &Form::operator=(const Form &other)
     return (*this);
 }
 
+Form::~Form()
+{
+    std::cout<<"Form destructor called"<<std::endl;
+}
+
 Form::GradeTooHighException::GradeTooHighException()
 {
     message = "Form: GradeTooHighException error";
@@ -84,8 +89,8 @@ Form::GradeTooLowException::~GradeTooLowException() throw() {}
 
 std::ostream &operator<<(std::ostream &out, const Form &obj)
 {
-    out << "Form " << obj.getn() << " infos :" << std::endl
-    << obj.gets() << " | " << obj.getsg() << " | " << obj.geteg() << std::endl;
+    out<<"Form "<< obj.getn()<<" infos :"<< std::endl
+    <<obj.gets()<<" | "<<obj.getsg()<<" | "<< obj.geteg()<<std::endl;
     return (out);
 }
 

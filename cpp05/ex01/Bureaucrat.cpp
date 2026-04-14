@@ -6,19 +6,19 @@ Bureaucrat::Bureaucrat() : name("default"), grade(150)
     std::cout<<"Bureaucrat default constructor called"<<std::endl;
 }
 
-Bureaucrat::Bureaucrat(const std::string &name,const  int &grade): name(name), grade(grade)
+Bureaucrat::Bureaucrat(const std::string &name,const  int &grade): name(name)
 {
     std::cout<<"Bureaucrat paramaterized constructor called"<<std::endl;
     if (grade < 1)
         throw GradeTooHighException();
     if (grade > 150)
         throw GradeTooLowException();
+    this->grade = grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &other)
+Bureaucrat::Bureaucrat(const Bureaucrat &other): name(other.getName())
 {
     std::cout<<"Bureaucrat copy construcor called"<<std::endl;
-    this->name = other.getName();
     this->grade = other.getGrade();
 }
 
@@ -26,10 +26,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
     std::cout<<"Bureaucrat assignment operator called"<<std::endl;
     if (this != &other)
-    {
-        this->name = other.getName();
         this->grade = other.getGrade();
-    }
     return (*this);
 }
 
@@ -107,11 +104,11 @@ void Bureaucrat::signForm(Form &obj)
     try
     {
         obj.beSigned(*this);
-        std::cout << this->name << " signed " << obj.getn() << std::endl;
+        std::cout<<this->name << " signed "<< obj.getn()<<std::endl;
     }
     catch(const std::exception& e)
     {
-        std::cerr << this->name << " couldn't sign " << obj.getn() << " because "<< e.what() << ".\n";
+        std::cerr<<this->name<<" couldn't sign "<<obj.getn()<<" because "<<e.what()<<".\n";
     }
     
 }
