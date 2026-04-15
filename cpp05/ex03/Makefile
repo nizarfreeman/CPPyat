@@ -5,7 +5,8 @@ SRC = main.cpp \
       AForm.cpp \
       PresidentialPardonForm.cpp \
       RobotomyRequestForm.cpp \
-      ShrubberyCreationForm.cpp
+      ShrubberyCreationForm.cpp \
+      Intern.cpp
 HEADER = Bureaucrat.hpp AForm.hpp
 OBJ = $(SRC:.cpp=.o)
 NAME = a.out
