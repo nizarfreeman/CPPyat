@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For You</title>
+
+<style>
+    body
+    {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(-45deg, #ffdde1, #ee9ca7, #c1c8ff, #b2f7ef);
+        background-size: 400% 400%;
+        animation: gradient 10s ease infinite;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+        color: #222;
+    }
+
+    @keyframes gradient
+    {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+
+    .card
+    {
+        text-align: center;
+        padding: 30px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.6);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        max-width: 400px;
+    }
+
+    button
+    {
+        margin-top: 20px;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        background: #ff6b81;
+        color: white;
+        font-size: 16px;
+        transition: 0.2s;
+    }
+
+    button:hover
+    {
+        transform: scale(1.05);
+    }
+
+    #message
+    {
+        margin-top: 20px;
+        font-size: 18px;
+        min-height: 60px;
+    }
+
+    .heart
+    {
+        position: absolute;
+        color: rgba(255,255,255,0.8);
+        animation: float 6s linear infinite;
+    }
+
+    @keyframes float
+    {
+        0% {transform: translateY(100vh) scale(0.5);}
+        100% {transform: translateY(-10vh) scale(1.2);}
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>hey</h2>
+    <p>press the button when you need a reminder</p>
+
+    <button onclick="showMessage()">press me</button>
+
+    <div id="message"></div>
+</div>
+
+<script>
+const messages =
+[
+    "I'm here. you're not alone.",
+    "take it slow today. no pressure.",
+    "you matter more than your bad moments.",
+    "if you're tired, rest. seriously.",
+    "you're doing better than you think.",
+    "i got you. always."
+];
+
+function showMessage()
+{
+    const msg = messages[Math.floor(Math.random() * messages.length)];
+    document.getElementById("message").innerText = msg;
+    spawnHearts();
+}
+
+function spawnHearts()
+{
+    for (let i = 0; i < 10; i++)
+    {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerText = "❤";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 10 + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() =>
+        {
+            heart.remove();
+        }, 6000);
+    }
+}
+</script>
+
+</body>
+</html>

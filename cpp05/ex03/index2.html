@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>31 Jokes</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0f0f0f;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    padding: 20px;
+    max-width: 900px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #444;
+    transform: scale(1.05);
+}
+
+#output {
+    margin: 20px;
+    padding: 20px;
+    max-width: 700px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    min-height: 60px;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<h1>press a number</h1>
+
+<div class="grid" id="grid"></div>
+
+<div id="output">pick one</div>
+
+<script>
+const jokes = [
+"Why should you never trust stairs? They’re always up to something.",
+"Why do ghosts like to take the elevator? It lifts their spirits.",
+"My wallet is like an onion. Opening it makes me cry.",
+"Why couldn’t the sailor learn the alphabet? He kept getting lost at C.",
+"What do you call a retired vegetable? A has-bean haha",
+"What’s an astronaut’s favorite part of a keyboard? The space bar.",
+"My brain has too many tabs open.",
+"What do you call a guy who’s really loud? Mike.",
+"Why doesn't Dracula have any friends? He's a bit of a pain in the neck.",
+"Where do cows go on Friday nights? The mooovies.",
+"What do you call a well-balanced horse? Stable.",
+"What did one plate say to the other? Lunch is on me.",
+"What do rich people say when they tickle babies? Gucci, Gucci, goo hahaha",
+"why did the otter cross the river? to get to the otter side.",
+"I went to the doctors recently, he said: \'Dont eat anything fatty\' I said: \'What, like bacon and burgers?\' he said: \'No. fatty don\'t eat anything\'.",
+`A woman is walking home with her 3 daughters.
+
+The eldest daughter turns to her and asks, "Mummy, how did I get my name?"
+
+"Well sweetie, when we were bringing you home from the hospital, a rose petal landed on your head! So that's why we named you Rose.”
+
+The second daughter, now curious, asks the same question.
+
+"Well darling, when we were bringing you home from the hospital, a lily petal landed on your head! So that's why we named you Lily."
+
+The third girl asks "HHGHGNGHGHNG?!?!?! DDDNBHGHBHNGHHH!!!".
+
+"Shhh, quiet now, Cinderblock."`,
+
+`A man is getting a checkup.
+
+Doctor: "You have to stop masturbating."
+
+Man: "Why?"
+
+Doctor: "Because I'm trying to examine you."`,
+`A guy is in a doctors office. His doctor is there with him.
+
+"I have two pieces of bad news," the doctor says.
+
+"What are they?"
+
+"Well, the first piece of news is that you have cancer."
+
+"What's the 2nd piece of news?" he asks.
+
+"Well, the 2nd piece of bad news is that you have Alzheimer's."
+
+The man laughs and says, "Well, at least I don't have cancer."`,
+"A Hispanic man goes to a vending machine and puts in 40 cents. The machine displays \"DIME\" on the screen. The man gets close to the machine and whispers, \"Yo quiero Pepsi\"",
+"My dog is a rescue, which is a really self righteous way of saying I bought a used dog ",
+"I opened Netflix ‘for 5 minutes’… it’s 3AM now.",
+"I’m not arguing, I’m just explaining why I’m right.",
+"I set goals. My comfort zone declined them.",
+"I don’t need anger management. People need to stop annoying me.",
+"I tried being cool. It didn’t update properly.",
+"I have 99 problems but I ignored all of them.",
+"My alarm clock and I are enemies.",
+"I eat stress for breakfast.",
+"I’m not short, I’m concentrated awesome.",
+"I wanted to be rich. Still loading…",
+"I live in my head rent free."
+];
+
+const grid = document.getElementById("grid");
+const output = document.getElementById("output");
+
+for (let i = 0; i < 31; i++) {
+    let btn = document.createElement("button");
+    btn.innerText = i + 1;
+
+    btn.onclick = () => {
+        output.innerText = jokes[i];
+    };
+
+    grid.appendChild(btn);
+}
+</script>
+
+</body>
+</html>

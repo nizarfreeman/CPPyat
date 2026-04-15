@@ -10,9 +10,9 @@ Bureaucrat::Bureaucrat(const std::string &name,const  int &grade): name(name)
 {
     std::cout<<"Bureaucrat paramaterized constructor called"<<std::endl;
     if (grade < 1)
-        throw GradeTooHighException();
+        throw GradeTooHighException("GradeTooHighException exception thrown");
     if (grade > 150)
-        throw GradeTooLowException();
+        throw GradeTooLowException("GradeTooLowException exception thrown");
     this->grade = grade;
 }
 
