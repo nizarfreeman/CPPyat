@@ -1,9 +1,9 @@
 C = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
-SRC = main.cpp ScalarConverter.cpp
-HEADER = ScalarConverter.hpp
+SRC = Base.cpp main.cpp
+HEADER = Base.hpp
 OBJ = $(SRC:.cpp=.o)
-NAME = convert
+NAME = a.out
 
 all: $(NAME)
 

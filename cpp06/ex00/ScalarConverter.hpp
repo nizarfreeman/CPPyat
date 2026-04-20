@@ -2,6 +2,12 @@
 # define SCALAR_
 # include <iostream>
 # include <climits>
+# include <cfloat>
+# include <iomanip>
+# include <string>
+# include <cmath>
+# include <cstdlib>
+
 enum e_type
 {
     SPECIAL,
@@ -20,11 +26,20 @@ class ScalarConverter
         ScalarConverter	&operator=(ScalarConverter const &obj);
         ~ScalarConverter();
 
-        // char int float double
-
-
         static void convert(std::string &literal);
-
 };
+
+void printSpecial(std::string &literal);
+void printChar(std::string &literal);
+void printInt(std::string &literal);
+void printFloat(std::string &literal);
+void printDouble(std::string &literal);
+
+int is_special(std::string &literal);
+int is_char(std::string &literal, size_t &len);
+int is_int(std::string &literal);
+int is_float(std::string &literal, size_t &len, size_t &dot);
+int get_type(std::string &literal);
+
 
 #endif

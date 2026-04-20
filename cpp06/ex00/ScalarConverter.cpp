@@ -17,6 +17,164 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &obj)
     return (*this);
 }
 
+ScalarConverter::~ScalarConverter()
+{
+    std::cout<<"ScalarConverter destructor called"<<std::endl;
+}
+
+//print special
+void printSpecial(std::string &literal)
+{
+    if (literal == "nan" || literal == "nanf")
+	{
+		std::cout<<"char: impossible"<<std::endl; 
+		std::cout<<"int: impossible"<<std::endl;
+		std::cout<<"float: nanf"<<std::endl;
+		std::cout<<"double: nan"<<std::endl;
+	}
+	else if (literal == "+inf" || literal == "+inff")
+	{
+		std::cout<<"char: impossible"<<std::endl;
+		std::cout<<"int: impossible"<<std::endl;
+		std::cout<<"float: +inff"<<std::endl;
+		std::cout<<"double: +inf"<<std::endl;
+    }
+	
+	else if (literal == "-inf" || literal == "-inff")
+	{
+		std::cout<<"char: impossible"<<std::endl;
+		std::cout<<"int: impossible"<<std::endl;
+		std::cout<<"float: -inff"<< std::endl;
+		std::cout<<"double: -inf"<< std::endl;
+	}
+}
+
+//print char
+void printChar(std::string &literal)
+{
+    char c;
+    if (literal.length() == 3 && literal[0] == '\'')
+        c = literal[1];
+    else
+        c = literal[0];
+    if (std::isprint(c))
+        std::cout<<"char: '"<<c<<"'"<<std::endl;
+    else
+        std::cout<<"char: Non displayable"<<std::endl;
+    std::cout<<"int : "<<static_cast<int>(c)<<std::endl;
+    std::cout<<"float: "<<static_cast<float>(c)<<"f"<<std::endl;
+    std::cout<<"double: "<<static_cast<double>(c)<<std::endl;
+}
+
+//print int
+void printInt(std::string &literal)
+{
+    long i = atol(literal.c_str());
+    
+    if (i >= 0 && i <= 127)
+	{
+		if (isprint(i))
+			std::cout<<"char: '"<< static_cast<char>(i)<<"'"<<std::endl;
+		else
+			std::cout<<"char: Non displayable"<<std::endl;
+	}
+    else
+        std::cout<<"char: impossible"<<std::endl;
+    
+    std::cout << "int: ";
+	if (i < INT_MIN || i > INT_MAX)
+		std::cout<<"impossible"<<std::endl;
+	else
+		std::cout<<static_cast<int>(i)<<std::endl;
+	std::cout<<"float: "<<static_cast<float>(i)<<".0f"<<std::endl;
+	std::cout<<"double: "<<static_cast<double>(i)<<".0"<<std::endl;
+}
+
+//print float
+void printFloat(std::string &literal)
+{
+    float   f = atof(literal.c_str());
+    bool    tolerance = std::fabs(f - static_cast<int>(f)) < 0.0000000000001;
+    
+    std::cout<<"char: ";
+	if (f < 0 || f > 127)
+		std::cout<<"impossible"<<std::endl;
+	else
+	{
+		if (isprint(f))
+			std::cout<<"'"<<static_cast<char>(f)<<"'"<<std::endl;
+		else 
+			std::cout<<"Non displayable"<<std::endl;
+	}
+
+    std::cout<<"int: ";
+    if (static_cast<long>(f) < INT_MIN || static_cast<long>(f) > INT_MAX)
+        std::cout<<"impossible"<<std::endl;
+    else
+        std::cout<<static_cast<int>(f)<<std::endl;
+    
+    std::cout << "float: ";
+    if (f < FLT_MIN || f > FLT_MAX)
+        std::cout<<"impossible"<<std::endl;
+    else
+    {
+        std::cout<<f;
+        if (tolerance)
+            std::cout<<".0f"<<std::endl;
+        else
+            std::cout<<"f"<<std::endl;
+    }
+    
+    std::cout<< "double: "<<static_cast<double>(f);
+    if (tolerance)
+        std::cout << ".0" << std::endl;
+    else
+        std::cout<<std::endl;
+}
+
+//print double
+void printDouble(std::string &literal)
+{
+    double  d = atof(literal.c_str());
+    bool    tolerance = std::fabs(d - static_cast<int>(d)) < 0.0000000000001;
+
+    std::cout<<"char: ";
+	if (d < 0 || d > 127)
+		std::cout<<"impossible"<< std::endl;
+	else
+	{
+		if (isprint(d))
+			std::cout<<"'"<<static_cast<char>(d)<<"'"<<std::endl;
+		else 
+			std::cout<<"Non displayable"<<std::endl;
+	}
+
+    std::cout << "int: ";
+	if (d < INT_MIN || d > INT_MAX)
+		std::cout<<"impossible"<<std::endl;
+	else
+		std::cout<<static_cast<int>(d)<<std::endl;
+    
+    std::cout<<"float: ";
+    if (d < FLT_MAX || d > FLT_MIN)
+        std::cout<<"impossible"<<std::endl;
+    else
+    {
+        std::cout<<static_cast<float>(d);
+        if (tolerance)
+            std::cout<<".0f"<<std::endl;
+        else
+            std::cout<<"f"<<std::endl;
+    }
+
+    std::cout<<"double: ";
+    if (d < DBL_MIN || d > DBL_MAX)
+        std::cout<<"impossible"<<std::endl;
+    else
+        std::cout<<d<<std::endl;
+}
+
+//========================//
 int is_special(std::string &literal)
 {
     if (literal == "-inff" || literal == "+inff" || literal == "nanf" || literal == "-inf"
@@ -34,7 +192,7 @@ int is_char(std::string &literal, size_t &len)
     return (0);
 }
 
-int is_int(std::string &literal, size_t &len)
+int is_int(std::string &literal)
 {
     int i = 0;
     
@@ -48,7 +206,7 @@ int is_int(std::string &literal, size_t &len)
             return 0;
         i++;
     }
-    long n = std::stol(literal);
+    long n = atol(literal.c_str());
     if (n > INT_MAX || n < INT_MIN)
         return 0;
     return (1);
@@ -93,7 +251,7 @@ int get_type(std::string &literal)
     {
         if (is_char(literal, len))
             return CHAR;
-        if (is_int(literal, len))
+        if (is_int(literal))
             return INT;
     }
     if (f != std::string::npos && dot != std::string::npos)
