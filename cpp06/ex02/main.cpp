@@ -1,5 +1,6 @@
 #include "Base.hpp"
 #include "iostream"
+#include <ctime>
 
 Base *generate(void)
 {
@@ -70,25 +71,26 @@ void identify(Base &p)
 	std::cout<<"Unknown type"<<std::endl;
 }
 
-
-class Wrong : public Base {};
-
 int main(void)
 {
-    std::cout << "--- Test with random instance ---" << std::endl;
+	std::srand(std::time(NULL));
+	{
+		Base *b = generate();
+		std::cout<<std::endl;
+		identify(b);
+		std::cout<<std::endl;
+		identify(*b);
 
-	Base *base = generate();
-	identify(base);
-	identify(*base);
-	delete base;
+		delete b;
+	}
+	std::cout<<"========================================================="<<std::endl;
+	{
+		Base *b = new Wrong();
+		std::cout<<std::endl;
+		identify(b);
+		std::cout<<std::endl;
+		identify(*b);
 
-	std::cout << std::endl << "--- Test with Wrong ---" << std::endl;
-	Wrong wrong;
-	identify(&wrong);
-	identify(wrong);
-
-	std::cout << std::endl << "--- Test with NULL ---" << std::endl;
-	Base *null = NULL;
-	identify(null);
-    return 0;
+		delete b;
+	}
 }

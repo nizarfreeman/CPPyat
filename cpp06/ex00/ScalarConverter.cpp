@@ -93,85 +93,90 @@ void printInt(std::string &literal)
 //print float
 void printFloat(std::string &literal)
 {
-    float   f = atof(literal.c_str());
-    bool    tolerance = std::fabs(f - static_cast<int>(f)) < 0.0000000000001;
-    
-    std::cout<<"char: ";
+	float	f = atof(literal.c_str());
+	bool	tol = (f == std::floor(f));
+
+	std::cout<<"char: ";
 	if (f < 0 || f > 127)
 		std::cout<<"impossible"<<std::endl;
 	else
 	{
-		if (isprint(f))
+		if (isprint((int)f))
 			std::cout<<"'"<<static_cast<char>(f)<<"'"<<std::endl;
-		else 
+		else
 			std::cout<<"Non displayable"<<std::endl;
 	}
 
-    std::cout<<"int: ";
-    if (static_cast<long>(f) < INT_MIN || static_cast<long>(f) > INT_MAX)
-        std::cout<<"impossible"<<std::endl;
-    else
-        std::cout<<static_cast<int>(f)<<std::endl;
-    
-    std::cout << "float: ";
-    if (f < FLT_MIN || f > FLT_MAX)
-        std::cout<<"impossible"<<std::endl;
-    else
-    {
-        std::cout<<f;
-        if (tolerance)
-            std::cout<<".0f"<<std::endl;
-        else
-            std::cout<<"f"<<std::endl;
-    }
-    
-    std::cout<< "double: "<<static_cast<double>(f);
-    if (tolerance)
-        std::cout << ".0" << std::endl;
-    else
-        std::cout<<std::endl;
+	std::cout<<"int: ";
+	if (f < INT_MIN || f > INT_MAX)
+		std::cout<<"impossible"<<std::endl;
+	else
+		std::cout<<static_cast<int>(f)<<std::endl;
+
+	std::cout<<"float: ";
+	if (f < -FLT_MAX || f > FLT_MAX)
+		std::cout<<"impossible"<<std::endl;
+	else
+	{
+		std::cout<<f;
+		if (tol)
+			std::cout<<".0f";
+		else
+			std::cout<<"f";
+		std::cout<<std::endl;
+	}
+
+	std::cout<<"double: "<<static_cast<double>(f);
+	if (tol)
+		std::cout<<".0";
+	std::cout<<std::endl;
 }
 
 //print double
 void printDouble(std::string &literal)
 {
-    double  d = atof(literal.c_str());
-    bool    tolerance = std::fabs(d - static_cast<int>(d)) < 0.0000000000001;
+	double	d = atof(literal.c_str());
+	bool	tol = (d == std::floor(d));
 
-    std::cout<<"char: ";
+	std::cout<<"char: ";
 	if (d < 0 || d > 127)
-		std::cout<<"impossible"<< std::endl;
+		std::cout<<"impossible"<<std::endl;
 	else
 	{
-		if (isprint(d))
+		if (isprint((int)d))
 			std::cout<<"'"<<static_cast<char>(d)<<"'"<<std::endl;
-		else 
+		else
 			std::cout<<"Non displayable"<<std::endl;
 	}
 
-    std::cout << "int: ";
+	std::cout<<"int: ";
 	if (d < INT_MIN || d > INT_MAX)
 		std::cout<<"impossible"<<std::endl;
 	else
 		std::cout<<static_cast<int>(d)<<std::endl;
-    
-    std::cout<<"float: ";
-    if (d < FLT_MAX || d > FLT_MIN)
-        std::cout<<"impossible"<<std::endl;
-    else
-    {
-        std::cout<<static_cast<float>(d);
-        if (tolerance)
-            std::cout<<".0f"<<std::endl;
-        else
-            std::cout<<"f"<<std::endl;
-    }
 
-    std::cout<<"double: ";
-    if (d < DBL_MIN || d > DBL_MAX)
-        std::cout<<"impossible"<<std::endl;
-    else
-        std::cout<<d<<std::endl;
+	std::cout<<"float: ";
+	if (d < -FLT_MAX || d > FLT_MAX)
+		std::cout<<"impossible"<<std::endl;
+	else
+	{
+		std::cout<<static_cast<float>(d);
+		if (tol)
+			std::cout<<".0f"<<std::endl;
+		else
+			std::cout<<"f"<<std::endl;
+	}
+
+	std::cout<<"double: ";
+	if (d < -DBL_MAX || d > DBL_MAX)
+		std::cout<<"impossible"<<std::endl;
+	else
+	{
+		std::cout<<d;
+		if (tol)
+			std::cout<<".0";
+		std::cout<<std::endl;
+	}
 }
 
 //========================//
