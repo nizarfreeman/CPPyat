@@ -18,12 +18,12 @@ enum e_type
 
 class ScalarConverter
 {
-    public:
+    private:
         ScalarConverter();
+    public:
         ScalarConverter(const ScalarConverter &other);
         ScalarConverter	&operator=(ScalarConverter const &obj);
         ~ScalarConverter();
-
         static void convert(std::string &literal);
 };
 
