@@ -1,7 +1,8 @@
 #include <iostream>
 #include "templates.hpp"
 
-int main( void ) {
+int main(void)
+{
     int a = 2;
     int b = 3;
     ::swap( a, b );
@@ -13,6 +14,6 @@ int main( void ) {
     ::swap(c, d);
     std::cout << "c = " << c << ", d = " << d << std::endl;
     std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
-return 0;
+    std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+    return (0);
 }

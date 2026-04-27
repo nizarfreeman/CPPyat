@@ -1,14 +1,14 @@
-#ifndef T_H
-# define T_h
+#ifndef TEMPLATES_H
+# define TEMPLATES_H
 # include <iostream>
 
 template <typename T>
-void swap(T a, T b)
+void swap(T &a, T &b)
 {
     T c;
     c = a;
     a = b;
-    a = c;
+    b = c;
 }
 
 template <typename T2>
