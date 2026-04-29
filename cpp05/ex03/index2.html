@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>31 Jokes</title>
+<title>Nokat Yarbi Tkon Funny</title>
 
 <style>
-body {
+body
+{
     margin: 0;
     font-family: Arial;
     background: #0f0f0f;
@@ -15,11 +16,13 @@ body {
     align-items: center;
 }
 
-h1 {
+h1
+{
     margin: 20px;
 }
 
-.grid {
+.grid
+{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
@@ -27,7 +30,8 @@ h1 {
     max-width: 900px;
 }
 
-button {
+button
+{
     padding: 10px;
     border: none;
     border-radius: 8px;
@@ -37,12 +41,14 @@ button {
     transition: 0.2s;
 }
 
-button:hover {
+button:hover
+{
     background: #444;
     transform: scale(1.05);
 }
 
-#output {
+#output
+{
     margin: 20px;
     padding: 20px;
     max-width: 700px;
@@ -57,13 +63,12 @@ button:hover {
 <body>
 
 <h1>press a number</h1>
-
 <div class="grid" id="grid"></div>
-
 <div id="output">pick one</div>
 
 <script>
-const jokes = [
+const jokes =
+[
 "Why should you never trust stairs? They’re always up to something.",
 "Why do ghosts like to take the elevator? It lifts their spirits.",
 "My wallet is like an onion. Opening it makes me cry.",
@@ -115,30 +120,26 @@ Doctor: "Because I'm trying to examine you."`,
 The man laughs and says, "Well, at least I don't have cancer."`,
 "A Hispanic man goes to a vending machine and puts in 40 cents. The machine displays \"DIME\" on the screen. The man gets close to the machine and whispers, \"Yo quiero Pepsi\"",
 "My dog is a rescue, which is a really self righteous way of saying I bought a used dog ",
-"I opened Netflix ‘for 5 minutes’… it’s 3AM now.",
-"I’m not arguing, I’m just explaining why I’m right.",
-"I set goals. My comfort zone declined them.",
-"I don’t need anger management. People need to stop annoying me.",
-"I tried being cool. It didn’t update properly.",
-"I have 99 problems but I ignored all of them.",
-"My alarm clock and I are enemies.",
-"I eat stress for breakfast.",
-"I’m not short, I’m concentrated awesome.",
-"I wanted to be rich. Still loading…",
-"I live in my head rent free."
-];
+"Why did Adele cross the road? To say hello from the other side.",
+"The only difference between my dad and an elevator, is the elevator knows how to raise a family ",
+"What do you call the making of a penis statue? An erection!",
+"Is there a hole in your shoe? -no -then how'd you get your foot in it.",
+"Why do you never see elephants hiding in trees? Because they're very good at it",
+"Why was the teacher cross eyed? Because he couldn't control his pupils .",
+"what do sea monsters eat? fish and ships.",
+"What's orange and sounds like a parrot? A carrot.",
+"A magician was driving down a street, and then he turned into a driveway. ",
+"Have you ever tried to eat a clock? Its very time consuming.",
+"MUAH !! "];
 
 const grid = document.getElementById("grid");
 const output = document.getElementById("output");
 
-for (let i = 0; i < 31; i++) {
+for (let i = 0; i < 31; i++)
+{
     let btn = document.createElement("button");
     btn.innerText = i + 1;
-
-    btn.onclick = () => {
-        output.innerText = jokes[i];
-    };
-
+    btn.onclick = () => { output.innerText = jokes[i]; };
     grid.appendChild(btn);
 }
 </script>
