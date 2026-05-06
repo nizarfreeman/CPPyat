@@ -1,75 +1,100 @@
-// #include "Span.hpp"
-
-// int main(void)
-// {
-//     Span sp = Span(5);
-//     sp.addNumber(6);
-//     sp.addNumber(3);
-//     sp.addNumber(17);
-//     sp.addNumber(9);
-//     sp.addNumber(11);
-//     std::cout << sp.shortestSpan() << std::endl;
-//     std::cout << sp.longestSpan() << std::endl;
-//     return (0);
-// }
-
 #include "Span.hpp"
+#include <iostream>
+#include <vector>
 #include <cstdlib>
 
 int main(void)
 {
-    // basic test from subject
-    Span sp = Span(5);
-    sp.addNumber(6);
-    sp.addNumber(3);
-    sp.addNumber(17);
-    sp.addNumber(9);
-    sp.addNumber(11);
-    std::cout << "=== Basic Test ===" << std::endl;
-    std::cout << "Shortest span: " << sp.shortestSpan() << std::endl; // 2
-    std::cout << "Longest span:  " << sp.longestSpan() << std::endl;  // 14
+	// ===== BASIC FUNCTIONALITY =====
+	Span sp(5);
+	sp.addNumber(6);
+	sp.addNumber(3);
+	sp.addNumber(17);
+	sp.addNumber(9);
+	sp.addNumber(11);
 
-    // 50000 values test
-    std::cout << "\n=== 50000 values Test ===" << std::endl;
-    Span big = Span(50000);
-    srand(42);
-    for (int i = 0; i < 50000; i++)
-        big.addNumber(rand() % 1000000);
-    std::cout << "Shortest span: " << big.shortestSpan() << std::endl;
-    std::cout << "Longest span:  " << big.longestSpan() << std::endl;
+	std::cout << "Basic: ";
+	std::cout << sp.shortestSpan() << " | " << sp.longestSpan() << std::endl;
 
-    // sequential test (known results)
-    std::cout << "\n=== Sequential Test ===" << std::endl;
-    Span seq = Span(50000);
-    for (int i = 0; i < 50000; i++)
-        seq.addNumber(i);
-    std::cout << "Shortest span: " << seq.shortestSpan() << std::endl; // 1
-    std::cout << "Longest span:  " << seq.longestSpan() << std::endl;  // 49999
+	// ===== EDGE CASE: ONLY 2 ELEMENTS =====
+	Span two(2);
+	two.addNumber(10);
+	two.addNumber(20);
 
-    // exception tests
-    std::cout << "\n=== Exception Tests ===" << std::endl;
-    try {
-        Span empty = Span(5);
-        empty.shortestSpan();
-    } catch (std::exception &e) {
-        std::cout << "Empty span: " << e.what() << std::endl;
-    }
-    try {
-        Span one = Span(5);
-        one.addNumber(42);
-        one.longestSpan();
-    } catch (std::exception &e) {
-        std::cout << "One element: " << e.what() << std::endl;
-    }
-    try {
-        Span full = Span(3);
-        full.addNumber(1);
-        full.addNumber(2);
-        full.addNumber(3);
-        full.addNumber(4); // should throw
-    } catch (std::exception &e) {
-        std::cout << "Overflow: " << e.what() << std::endl;
-    }
+	std::cout << "Two elements: ";
+	std::cout << two.shortestSpan() << " | " << two.longestSpan() << std::endl;
 
-    return (0);
+	// ===== RANGE INSERT TEST =====
+	std::vector<int> v;
+	v.push_back(100);
+	v.push_back(105);
+	v.push_back(110);
+
+	Span range(5);
+	range.addNumber(1);
+	range.addNumber(2);
+	range.addNumber(v.begin(), v.end());
+
+	std::cout << "Range insert: ";
+	std::cout << range.shortestSpan() << " | " << range.longestSpan() << std::endl;
+
+	// ===== LARGE DATA (STRESS LIGHT) =====
+	Span big(10000);
+	for (int i = 0; i < 10000; i++)
+		big.addNumber(i);
+
+	std::cout << "Big: ";
+	std::cout << big.shortestSpan() << " | " << big.longestSpan() << std::endl;
+
+	// ===== EXCEPTIONS =====
+	try
+	{
+		Span empty(5);
+		empty.shortestSpan();
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Empty: " << e.what() << std::endl;
+	}
+
+	try
+	{
+		Span one(5);
+		one.addNumber(42);
+		one.longestSpan();
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "One element: " << e.what() << std::endl;
+	}
+
+	try
+	{
+		Span full(2);
+		full.addNumber(1);
+		full.addNumber(2);
+		full.addNumber(3);
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Overflow: " << e.what() << std::endl;
+	}
+
+	try
+	{
+		Span range_fail(3);
+		std::vector<int> tmp;
+		tmp.push_back(1);
+		tmp.push_back(2);
+		tmp.push_back(3);
+		tmp.push_back(4);
+
+		range_fail.addNumber(tmp.begin(), tmp.end());
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Range overflow: " << e.what() << std::endl;
+	}
+
+	return 0;
 }

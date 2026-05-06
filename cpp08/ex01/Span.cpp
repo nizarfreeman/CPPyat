@@ -38,8 +38,15 @@ unsigned int Span::getMax() const
 void Span::addNumber(int n)
 {
     if (data_.size() == max_)
-        throw std::runtime_error("Max is reached, can't push any more value");
+        throw std::runtime_error("Max is reached, can't push any more values");
     data_.push_back(n);
+}
+
+void Span::addNumber(std::vector<int>::iterator bg, std::vector<int>::iterator en)
+{
+    if (data_.size() + std::distance(bg, en) > max_)
+        throw std::runtime_error("Max is reached, can't push any more values");
+    data_.insert(data_.end(), bg, en);
 }
 
 int Span::longestSpan() const
