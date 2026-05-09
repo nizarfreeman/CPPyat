@@ -1,7 +1,6 @@
 #ifndef M
 # define M
 # include <stack>
-# include <deque>
 # include <iostream>
 
 template <typename T>

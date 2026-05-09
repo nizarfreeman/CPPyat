@@ -1,8 +1,6 @@
 #include "Span.hpp"
 
-Span::Span()
-{
-}
+Span::Span() {}
 
 Span::Span(unsigned int n)
 {
@@ -25,10 +23,7 @@ Span &Span::operator=(const Span &other)
     return (*this);
 }
 
-Span::~Span()
-{
-    
-}
+Span::~Span() {}
 
 unsigned int Span::getMax() const
 {
