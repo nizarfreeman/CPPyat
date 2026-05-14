@@ -33,7 +33,7 @@ void parse_data_(std::map<std::string, double> &data_)
 bool isLeapYear(int year)
 {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-}
+} 
 
 // YYYY-MM-DD
 bool evaluate_date_(std::string &str)
@@ -130,11 +130,36 @@ void process_(std::map<std::string, double> &data_, const char *input_)
         if (!evaluate_value_(value, value_))
         {
                 // throw std::runtime_error("Error: invalid value");
-            std::cout<<"Error: Invalid value => "<<value_<<std::endl;
+            std::cout<<"Error: Invalid value => "<<value<<std::endl;
             continue;
         }
-        else
-            std::cout<<date<<" "<<value<<std::endl;
+        // else
+        //     std::cout<<date<<" "<<value<<std::endl;
+
+        char *end;
+        value_ = std::strtod(value.c_str(), &end);
+        if (*end != '\0' || value_ < 0)
+        {
+            std::cout << "Error: not a positive number." << std::endl;
+            continue;
+        }
+        if (value_ > 1000)
+        {
+            std::cout << "Error: too large a number." << std::endl;
+            continue;
+        }
+
+        std::map<std::string, double>::iterator it = data_.lower_bound(date);
+        if (it == data_.end() || it->first != date)
+        {
+            if (it == data_.begin())
+            {
+                std::cout<<"Error: bad input => " << line << std::endl;
+                continue;
+            }
+            --it;
+        }
+        std::cout << date << " => " << value_ << " = " << it->second * value_ << std::endl;
     }
 }
 
